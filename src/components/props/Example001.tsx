@@ -76,6 +76,11 @@ const BindEditor = ({
   onDataChange,
   onDataDelete
 }: IBindEditorProps) => {
+
+    // let [param, setParam] = useState(data.param);
+    // let [code, setCode] = useState(data.code);
+    // let [isArray, setIsArray] = useState(data.isArray);
+
   return (
     <div
       style={{
@@ -102,7 +107,7 @@ const BindEditor = ({
       <TextField
         label="param"
         variant="filled"
-        defaultValue={data.param}
+        value={data.param}
         onChange={event => {
           let renewData: IData = {
             code: data.code,
@@ -117,7 +122,7 @@ const BindEditor = ({
         select
         label="code"
         variant="filled"
-        defaultValue={data.code}
+        value={data.code}
         onChange={event => {
           let renewData: IData = {
             code: event.target.value,
@@ -240,7 +245,7 @@ export const Example001 = () => {
         <>
           <Divider />
           <BindEditor
-            key={v4()}
+            key={`${i}`}
             data={childData}
             index={i}
             onDataDelete={() => {
