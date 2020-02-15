@@ -8,12 +8,12 @@ import {
   Fab,
   Button,
   Tooltip,
-  IconButton
+  IconButton,
+  useTheme
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import _ from "lodash";
-import { v4 } from "uuid";
 
 const currencies = [
   {
@@ -76,11 +76,6 @@ const BindEditor = ({
   onDataChange,
   onDataDelete
 }: IBindEditorProps) => {
-
-    // let [param, setParam] = useState(data.param);
-    // let [code, setCode] = useState(data.code);
-    // let [isArray, setIsArray] = useState(data.isArray);
-
   return (
     <div
       style={{
@@ -94,9 +89,9 @@ const BindEditor = ({
           justifyContent: "space-between"
         }}
       >
-        {index}
         <IconButton
           size="small"
+          color="secondary"
           onClick={event => {
             onDataDelete();
           }}
@@ -163,7 +158,7 @@ const BindEditor = ({
   );
 };
 
-export const Example001 = () => {
+export default () => {
   const [code, setCode] = useState(initialData.code);
   const [param, setParam] = useState(initialData.param);
   const [isArray, setIsArray] = useState(initialData.isArray);
@@ -172,17 +167,15 @@ export const Example001 = () => {
   );
   const [children, setChildren] = useState(initialData.children);
 
-  useEffect(() => {
-    console.log("useEffect -- parent");
-    console.log(resultVariableName);
-    console.log(code);
-    console.log(param);
-    console.log(isArray);
-    console.log(children);
-  });
+  const theme = useTheme();
 
   return (
-    <div key="parent" style={{ position: "absolute", right: 0, width: 300 }}>
+    <div
+      key="parent"
+      style={{
+        color: theme.palette.text.primary
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -291,33 +284,18 @@ export const Example001 = () => {
       </Fab>
 
       <div style={{ margin: 10, marginBottom: 20 }}>
-        {children && children.length > 0  && (
-        <Button
-          variant="contained"
-          size="small"
-          color="secondary"
-          onClick={() => {
-            setChildren([]);
-          }}
-        >
-          All Delete
-        </Button>
+        {children && children.length > 0 && (
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            onClick={() => {
+              setChildren([]);
+            }}
+          >
+            All Delete
+          </Button>
         )}
-
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          onClick={() => {
-            console.log(resultVariableName);
-            console.log(code);
-            console.log(param);
-            console.log(isArray);
-            console.log(children);
-          }}
-        >
-          Confirm
-        </Button>
       </div>
     </div>
   );
